@@ -1,4 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faLock } from "@fortawesome/free-solid-svg-icons";
+
+import '../../styles/style.css';
+
 
 export default function Login() {
   return (
@@ -17,27 +22,31 @@ export default function Login() {
           className="flex flex-1 h-1/2 flex-col gap-4 justify-center ps-52 pe-52">
           <div className="flex flex-col h-1/2 gap-4 justify-center ">
             <div className="flex flex-auto">
-              <label htmlFor="username" className="w-full">
-                <span>
-                  {/* <FontAwesomeIcon icon="fa-solid fa-user" /> */}
+              <label htmlFor="username" className="w-full relative block">
+                <span className="absolute inset-y-0 left-4 flex items-center">
+                  <FontAwesomeIcon icon={faUser} style={{fontSize: "1.5rem"}} className="text-primary"/>
                 </span>
                 <input
                   type="text"
                   id="username"
                   name="username"
                   placeholder="Username"
-                  className="w-full h-full rounded-[5px] placeholder:text-[#92c7cfa1] placeholder:font-bold placeholder:tracking-wide ps-5"
+                  style={{color : 'var(--primary)'}}
+                  className="w-full h-full rounded-[5px] placeholder:text-[var(--hint)] placeholder:font-bold placeholder:tracking-wide ps-12"
                 />
               </label>
             </div>
             <div className="flex flex-auto">
-              <label htmlFor="password" className="w-full">
+              <label htmlFor="password" className="w-full relative block">
+                <span className="absolute inset-y-0 left-4 flex items-center">
+                <FontAwesomeIcon icon={faLock} style={{fontSize: "1.5rem"}} className="text-primary" />
+                </span>
                 <input
                   type="password"
                   id="password"
                   name="password"
                   placeholder="Password"
-                  className="w-full h-full rounded-[5px] placeholder:text-[#92c7cfa1] placeholder:font-bold placeholder:tracking-wide ps-5"
+                  className="w-full h-full rounded-[5px] placeholder:text-[var(--hint)] placeholder:font-bold placeholder:tracking-wide ps-12"
                 />
               </label>
             </div>
