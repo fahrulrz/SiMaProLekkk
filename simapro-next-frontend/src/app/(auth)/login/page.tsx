@@ -4,15 +4,20 @@ import { faLock } from "@fortawesome/free-solid-svg-icons";
 
 import "../../styles/style.css";
 
+import Image from "next/image";
+
 export default function Login() {
   return (
     <div className="w-screen h-screen flex items-center justify-center bg-white">
       <div className="flex flex-row bg-primary w-3/4 h-1/2 items-center">
-        <div className="flex flex-1 w-1/3 h-full bg-primary justify-center items-center p-20 ">
-          <img
-            src="/image/logo.png"
+        <div className="flex flex-1 w-1/2 h-full bg-primary justify-center items-center ps-20">
+          <Image
+            src="/assets/logo.png"
             alt="Logo SiMaPro"
-            className="bg-white h-full w-full flex justify-center items-center text-black"
+            width={370}
+            height={370}
+            className="bg-white flex justify-center items-center text-black"
+
           />
         </div>
         <form
@@ -100,3 +105,10 @@ export default function Login() {
     </div>
   );
 }
+
+
+// Login.getLayout = function getLayout(page: React.ReactElement) {
+//   return <div>{page}</div>
+// }
+
+// export default Login;
