@@ -41,7 +41,7 @@ export default function ResetPassword() {
                   name="email"
                   placeholder="Email"
                   style={{ color: "var(--primary)" }}
-                  className="w-full h-1/2 rounded-[5px] placeholder:text-[var(--hint)] placeholder:font-bold placeholder:tracking-wide ps-12 font-bold tracking-wide focus:outline-none"
+                  className="w-full h-1/2 border-none rounded-[5px] placeholder:text-[var(--hint)] placeholder:font-bold placeholder:tracking-wide p-5 ps-12 font-bold tracking-wide focus:ring-2 focus:ring-[var(--border)] focus:outline-none"
                 />
               </label>
             </div>
@@ -49,7 +49,7 @@ export default function ResetPassword() {
           <div className="flex justify-center items-center h-1/4 gap-5">
             <button
               type="submit"
-              className="w-full h-full bg-white text-primary flex justify-center items-center rounded-[15px] font-bold tracking-wide">
+              className="w-full h-full bg-white text-primary flex justify-center items-center rounded-[5px] font-bold tracking-wide">
               Send
               <FontAwesomeIcon
                 icon={faPaperPlane}

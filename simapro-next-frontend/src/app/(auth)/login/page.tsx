@@ -17,11 +17,10 @@ export default function Login() {
             width={370}
             height={370}
             className="bg-white flex justify-center items-center text-black"
-
           />
         </div>
         <form
-          action="#"
+          action="/dashboard"
           method="post"
           className="flex flex-1 h-1/2 flex-col gap-4 justify-center ps-40 pe-40">
           <div className="flex flex-col h-1/2 gap-4 justify-center ">
@@ -40,7 +39,7 @@ export default function Login() {
                   name="username"
                   placeholder="Username"
                   style={{ color: "var(--primary)" }}
-                  className="w-full h-full rounded-[5px] placeholder:text-[var(--hint)] placeholder:font-bold placeholder:tracking-wide ps-12 font-bold tracking-wide focus:ring-2 focus:outline-none focus:ring-[var(--border)]"
+                  className="w-full h-full border-none rounded-[5px] placeholder:text-[var(--hint)] placeholder:font-bold placeholder:tracking-wide ps-12 font-bold tracking-wide focus:ring-2 focus:outline-none focus:ring-[var(--border)]"
                 />
               </label>
             </div>
@@ -58,7 +57,7 @@ export default function Login() {
                   id="password"
                   name="password"
                   placeholder="Password"
-                  className="w-full h-full rounded-[5px] placeholder:text-[var(--hint)] placeholder:font-bold placeholder:tracking-wide ps-12 font-bold tracking-wide focus:outline-none focus:ring-2 focus:ring-[var(--border)]"
+                  className="w-full h-full border-none rounded-[5px] placeholder:text-[var(--hint)] placeholder:font-bold placeholder:tracking-wide ps-12 font-bold tracking-wide focus:outline-none focus:ring-2 focus:ring-[var(--border)]"
                 />
               </label>
             </div>

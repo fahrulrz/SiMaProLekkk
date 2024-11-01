@@ -11,7 +11,7 @@ import {
   MenuItem,
   MenuItems,
 } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 interface NavigationItem {
   name: string;
@@ -20,7 +20,7 @@ interface NavigationItem {
 }
 
 const navigation: NavigationItem[] = [
-  { name: "Dashboard", href: "dashboard", current: true },
+  { name: "Home", href: "dashboard", current: true },
   { name: "Mahasiswa", href: "mahasiswa", current: false },
   { name: "Stakeholder", href: "stakeholder", current: false },
   { name: "Dosen", href: "dosen", current: false },
@@ -49,7 +49,7 @@ const Navbar: React.FC = () => {
                   )}
                 </DisclosureButton>
               </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+              <div className="flex flex-1 items-center sm:items-stretch sm:justify-start p-12 sm:p-0">
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="h-10 w-auto rounded-full"
@@ -60,25 +60,29 @@ const Navbar: React.FC = () => {
                 </div>
                 <div className="hidden sm:ml-6 sm:flex items-center justify-center">
                   <div className="flex space-x-4 items-center">
-                    <div className="font-black font-sans">Sistem Informasi Manajemen Proyek Aplikasi Dasar</div>
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? "text-white bg-blue-950 font-black"
-                            : " text-white hover:bg-red-700 hover:text-white ease-in-out duration-700",
-                          "rounded-md px-3 py-2 text-sm font-medium"
-                        )}
-                        aria-current={item.current ? "page" : undefined}>
-                        {item.name}
-                      </a>
-                    ))}
+                    <div className="font-black text-white text-xl font-sans me-16">
+                      Sistem Informasi Manajemen Proyek Aplikasi Dasar
+                    </div>
+                    <div className="flex gap-10">
+                      {navigation.map((item) => (
+                        <a
+                          key={item.name}
+                          href={item.href}
+                          className={classNames(
+                            item.current
+                              ? "text-primary bg-primary bg-white font-black"
+                              : " text-white hover:bg-white hover:text-primary ease-in-out duration-700",
+                            "rounded-md px-3 py-2 text-lg "
+                          )}
+                          aria-current={item.current ? "page" : undefined}>
+                          {item.name}
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="absolute inset-y-0 h-10 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <div className="inset-y-0 h-10 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>

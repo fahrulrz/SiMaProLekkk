@@ -11,7 +11,7 @@ export default function AuthLayout({
       {/* Layout khusus untuk main page */}
 
       {/* navbar start */}
-      <div className="sticky top-0 left-0 right-0">
+      <div className="sticky top-0 left-0 right-0 z-50">
         <Navbar />
       </div>
 
