@@ -4,6 +4,8 @@
 
 // import React, { useEffect,  } from "react";
 import Image from "next/image";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 import { useState } from "react";
 
@@ -14,7 +16,9 @@ import { useState } from "react";
 // }
 
 const Card: React.FC = () => {
-  const [isHovered, setIsHovered] = useState<boolean[]>([false, false, false]);
+  const [isHovered, setIsHovered] = useState<boolean[]>([false, false, false, false]);
+
+  Aos.init();
 
   const handleMouseEnter = (index: number) => {
     const newIsHovered = [...isHovered];
@@ -31,8 +35,10 @@ const Card: React.FC = () => {
   return (
     <div className=" grid grid-cols-2 justify-between px-12 gap-10">
       {/* card yang dibuat perulangan */}
-      {[...Array(3)].map((_, index) => (
+      {[...Array(4)].map((_, index) => (
         <div
+          data-aos={[index % 2 === 0 ? "fade-up-right" : "fade-up-left"]}
+          data-aos-duration="1000"
           key={index}
           className="bg-SimaPro flex w-full h-[28rem] shadow-lg rounded-md overflow-hidden">
           <div className="relative flex items-end w-full h-full overflow-hidden">
@@ -69,7 +75,6 @@ const Card: React.FC = () => {
 };
 
 export default Card;
-
 
 // menggunakan api
 

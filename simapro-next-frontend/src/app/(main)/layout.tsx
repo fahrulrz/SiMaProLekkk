@@ -1,5 +1,6 @@
 // src/app/(auth)/layout.tsx
-import Navbar from "../../components/Navbar";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer"
 
 export default function AuthLayout({
   children,
@@ -7,7 +8,7 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="auth-layout">
+    <div className="auth-layout bg-[#E5E1DA]">
       {/* Layout khusus untuk main page */}
 
       {/* navbar start */}
@@ -17,6 +18,9 @@ export default function AuthLayout({
 
       {/* navbar end */}
       {children}
+      <div className="mt-14">
+        <Footer />
+      </div>
     </div>
   );
 }

@@ -13,26 +13,38 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
+import { usePathname } from "next/navigation";
+
 interface NavigationItem {
   name: string;
   href: string;
   current: boolean;
 }
 
-const navigation: NavigationItem[] = [
-  { name: "Home", href: "dashboard", current: true },
-  { name: "Mahasiswa", href: "mahasiswa", current: false },
-  { name: "Stakeholder", href: "stakeholder", current: false },
-  { name: "Dosen", href: "dosen", current: false },
+let navigation: NavigationItem[] = [
+  { name: "Home", href: "/home", current: false },
+  { name: "Mahasiswa", href: "/mahasiswa", current: false },
+  { name: "Stakeholder", href: "/stakeholder", current: false },
+  { name: "Dosen", href: "/dosen", current: false },
 ];
+
+const setCurrentPath = (path: string) => {
+  navigation = navigation.map((item) => 
+    item.href === path
+      ? { ...item, current: true }
+      : { ...item, current: false }
+  )
+}
 
 function classNames(...classes: string[]): string {
   return classes.filter(Boolean).join(" ");
 }
 
 const Navbar: React.FC = () => {
+  const pathname = usePathname();
+  setCurrentPath(pathname);
   return (
-    <Disclosure as="nav" className="bg-primary">
+    <Disclosure as="nav" className="bg-primary flex items-center justify-center">
       {({ open }) => (
         <>
           <div className="mx-auto w-full px-2 sm:px-6 lg:px-8">
@@ -70,8 +82,8 @@ const Navbar: React.FC = () => {
                           href={item.href}
                           className={classNames(
                             item.current
-                              ? "text-primary bg-primary bg-white font-black"
-                              : " text-white hover:bg-white hover:text-primary ease-in-out duration-700",
+                              ? "text-primary bg-primary bg-white bg-blend-normal font-black"
+                              : " text-white hover:bg-white hover:text-primary ease-in-out duration-300",
                             "rounded-md px-3 py-2 text-lg "
                           )}
                           aria-current={item.current ? "page" : undefined}>

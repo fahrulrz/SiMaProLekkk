@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
             />
           </div>
           <div className="ms-4 flex flex-col gap-4">
-            <p>UGM</p>
+            <p>Universitas Gadjah Mada</p>
             <p>Fahrul (081228660482)</p>
             <p>muhamadfahrulrazi@mail.ugm.ac.id</p>
           </div>

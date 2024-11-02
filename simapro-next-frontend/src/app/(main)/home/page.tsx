@@ -3,7 +3,6 @@
 // import components
 import Carousel from "@/components/MyCarousel";
 import Card from "@/components/Card";
-import Footer from "@/components/Footer";
 
 import "../../styles/style.css";
 
@@ -24,7 +23,7 @@ export default function Dashboard() {
     <div className="flex flex-col w-full h-full bg-[#E5E1DA] no-scrollbar">
       <div className="flex w-full h-full text-black">
         <div className="flex w-full flex-col h-full">
-          <div className="items-center w-full h-[46rem] justify-center">
+          <div className="items-center w-full h-[42rem] justify-center">
             <Carousel />
           </div>
 
@@ -32,7 +31,7 @@ export default function Dashboard() {
             <div className="flex h-20 w-full gap-6 ps-12">
               {/* dropdown filter */}
               <Menu as="div" className="relative inline-block w-1/5 text-left">
-                <div>
+                <div data-aos="fade-up" data-aos-duration="700">
                   <MenuButton
                     className="inline-flex w-full h-10 items-center gap-x-1.5 rounded-md bg-primary px-3 py-2 text-base text-white tracking-wide font-bold shadow-sm hover:bg-gray-50 hover:text-primary transition ease-in-out duration-300"
                     onMouseEnter={() => setIsHovered(true)}
@@ -119,7 +118,7 @@ export default function Dashboard() {
               {/* dropdown Filter end */}
 
               {/* button add start */}
-              <a href="#">
+              <a data-aos="fade-up" data-aos-duration="800" href="add-project">
                 <button
                   type="submit"
                   className="w-fit h-10 bg-primary ps-4 pe-4 shadow-md text-white flex justify-center items-center rounded-[5px] font-bold tracking-wide hover:bg-gray-50 hover:text-primary transition ease-in-out duration-300">
@@ -132,7 +131,7 @@ export default function Dashboard() {
                 </button>
               </a>
 
-              <a href="#">
+              <a data-aos="fade-up" data-aos-duration="900" href="#">
                 <button
                   type="submit"
                   className="w-fit h-10 bg-primary ps-4 pe-4 shadow-md text-white flex justify-center items-center rounded-[5px] font-bold tracking-wide hover:bg-gray-50 hover:text-primary transition ease-in-out duration-300">
@@ -145,7 +144,7 @@ export default function Dashboard() {
                 </button>
               </a>
 
-              <a href="#">
+              <a data-aos="fade-up" data-aos-duration="1000" href="#">
                 <button
                   type="submit"
                   className="w-fit h-10 bg-primary ps-4 pe-4 shadow-md text-white flex justify-center items-center rounded-[5px] font-bold tracking-wide hover:bg-gray-50 hover:text-primary transition ease-in-out duration-300">
@@ -169,9 +168,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-      <div className="mt-14">
-        <Footer />
-      </div>
+
     </div>
   );
 }

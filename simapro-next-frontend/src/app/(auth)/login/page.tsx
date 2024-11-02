@@ -20,7 +20,7 @@ export default function Login() {
           />
         </div>
         <form
-          action="/dashboard"
+          action="/home"
           method="post"
           className="flex flex-1 h-1/2 flex-col gap-4 justify-center ps-40 pe-40">
           <div className="flex flex-col h-1/2 gap-4 justify-center ">
