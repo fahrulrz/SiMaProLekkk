@@ -2,6 +2,10 @@
 "use client";
 
 import React from "react";
+import "../app/styles/style.css";
+
+import Search from "@/components/Search";
+
 import {
   Disclosure,
   DisclosureButton,
@@ -29,12 +33,12 @@ let navigation: NavigationItem[] = [
 ];
 
 const setCurrentPath = (path: string) => {
-  navigation = navigation.map((item) => 
+  navigation = navigation.map((item) =>
     item.href === path
       ? { ...item, current: true }
       : { ...item, current: false }
-  )
-}
+  );
+};
 
 function classNames(...classes: string[]): string {
   return classes.filter(Boolean).join(" ");
@@ -44,7 +48,9 @@ const Navbar: React.FC = () => {
   const pathname = usePathname();
   setCurrentPath(pathname);
   return (
-    <Disclosure as="nav" className="bg-primary flex items-center justify-center">
+    <Disclosure
+      as="nav"
+      className="bg-primary flex items-center justify-center">
       {({ open }) => (
         <>
           <div className="mx-auto w-full px-2 sm:px-6 lg:px-8">
@@ -95,6 +101,10 @@ const Navbar: React.FC = () => {
                 </div>
               </div>
               <div className="inset-y-0 h-10 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                {/* Search */}
+
+                <Search />
+
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>

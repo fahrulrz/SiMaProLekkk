@@ -42,9 +42,11 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         primary: "var(--primary)",
+        hint: "var(--hint)",
+        inputAddProject: "var(--inputAddProject)",
       },
       fontFamily: {
-        sans : ['Inria Sans', 'sans-serif'],
+        sans: ["Inria Sans", "sans-serif"],
       },
     },
   },
