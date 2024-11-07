@@ -7,7 +7,8 @@ import Image from "next/image";
 import Aos from "aos";
 import "aos/dist/aos.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 // Definisikan tipe untuk item data
 // interface Item {
@@ -16,9 +17,18 @@ import { useState } from "react";
 // }
 
 const Card: React.FC = () => {
-  const [isHovered, setIsHovered] = useState<boolean[]>([false, false, false, false]);
+  const [isHovered, setIsHovered] = useState<boolean[]>([
+    false,
+    false,
+    false,
+    false,
+  ]);
 
-  Aos.init();
+  const router = useRouter();
+
+  useEffect(() => {
+    Aos.init();
+  }, []);
 
   const handleMouseEnter = (index: number) => {
     const newIsHovered = [...isHovered];
@@ -32,6 +42,10 @@ const Card: React.FC = () => {
     setIsHovered(newIsHovered);
   };
 
+  const clickHandler = (index: number) => {
+      router.push(`/home/content?id=${index}`);
+  };
+
   return (
     <div className=" grid grid-cols-2 justify-between px-12 gap-10">
       {/* card yang dibuat perulangan */}
@@ -40,6 +54,7 @@ const Card: React.FC = () => {
           data-aos={[index % 2 === 0 ? "fade-up-right" : "fade-up-left"]}
           data-aos-duration="1000"
           key={index}
+          onClick={() => clickHandler(index)}
           className="bg-SimaPro flex w-full h-[28rem] shadow-lg rounded-md overflow-hidden">
           <div className="relative flex items-end w-full h-full overflow-hidden">
             <div
@@ -56,13 +71,7 @@ const Card: React.FC = () => {
 
             <div
               className={`absolute ${isHovered[index] ? "translate-y-0" : "translate-y-12"} ${isHovered[index] ? "opacity-100" : "opacity-0"} delay-150 z-10 w-full flex flex-row items-center gap-5 ps-4 mb-4 font-black transition ease-in-out duration-1000`}>
-              <Image
-                src="/assets/logo.png"
-                alt="Logo SiMaPro"
-                width={50}
-                height={50}
-                className="text-black h-10 w-10 rounded-full"
-              />
+              
 
               <h1>SiMaPro Cikk {index + 1}</h1>
             </div>

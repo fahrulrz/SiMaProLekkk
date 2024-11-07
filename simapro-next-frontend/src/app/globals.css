@@ -21,6 +21,11 @@
   }
 }
 
+html {
+  overflow: auto !important;
+  scroll-behavior: smooth;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);

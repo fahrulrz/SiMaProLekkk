@@ -120,6 +120,13 @@ const Navbar: React.FC = () => {
                   </div>
                   <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <MenuItem>
+                      {/* {({ active }) => ( */}
+                        <div className="px-4 py-2 text-sm text-gray-700 border-b-2">
+                          username
+                        </div>
+                      // )}
+                    </MenuItem>
+                    <MenuItem>
                       {({ active }) => (
                         <a
                           href="#"
@@ -127,22 +134,10 @@ const Navbar: React.FC = () => {
                             active ? "bg-gray-100" : "",
                             "block px-4 py-2 text-sm text-gray-700"
                           )}>
-                          Your Profile
+                          Login
                         </a>
                       )}
                     </MenuItem>
-                    {/* <MenuItem>
-                      {({ active }) => (
-                        <a
-                          href="#"
-                          className={classNames(
-                            active ? "bg-gray-100" : "",
-                            "block px-4 py-2 text-sm text-gray-700"
-                          )}>
-                          Settings
-                        </a>
-                      )}
-                    </MenuItem> */}
                     <MenuItem>
                       {({ active }) => (
                         <a
