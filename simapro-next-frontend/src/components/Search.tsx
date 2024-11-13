@@ -1,6 +1,8 @@
 
 // import { useState } from "react";
 
+import { usePathname } from "next/navigation";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
@@ -10,6 +12,19 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 // }
 
 const Search = () => {
+
+  const pathname = usePathname();
+
+  const path = pathname.split("/");
+  let search = "";
+
+  if (path[path.length - 1] == "home") {
+    search = "Search Project";
+  } else {
+
+    search = "Search " + path[1].charAt(0).toUpperCase() + path[1].slice(1);
+  }
+
 
     // menggunakan api
 //   const [query, setQuery] = useState<string>("");
@@ -85,7 +100,7 @@ const Search = () => {
         </span>
         <input
           className="placeholder:italic placeholder:text-[#92c7cfd0] text-primary block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
-          placeholder="Search projects..."
+          placeholder={search}
           type="text"
           name="search"
         />

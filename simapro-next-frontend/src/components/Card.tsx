@@ -10,19 +10,27 @@ import "aos/dist/aos.css";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-// Definisikan tipe untuk item data
-// interface Item {
-//   id: number; // Misalkan ada property 'id'
-//   name: string; // Misalkan ada property 'name'
-// }
+import Link from "next/link";
 
-const Card: React.FC = () => {
-  const [isHovered, setIsHovered] = useState<boolean[]>([
-    false,
-    false,
-    false,
-    false,
-  ]);
+interface CardProps {
+  id: number;
+  name: string;
+  imageUrl: string;
+  dataAos: string;
+
+}
+
+const Card: React.FC<CardProps> = ({ id, name, imageUrl, dataAos}) => {
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 
   const router = useRouter();
 
@@ -30,135 +38,47 @@ const Card: React.FC = () => {
     Aos.init();
   }, []);
 
-  const handleMouseEnter = (index: number) => {
-    const newIsHovered = [...isHovered];
-    newIsHovered[index] = true;
-    setIsHovered(newIsHovered);
-  };
 
-  const handleMouseLeave = (index: number) => {
-    const newIsHovered = [...isHovered];
-    newIsHovered[index] = false;
-    setIsHovered(newIsHovered);
-  };
-
-  const clickHandler = (index: number) => {
-      router.push(`/home/content?id=${index}`);
+  const clickHandler = (id: number) => {
+    router.push(`/home/project?id=${id}`);
   };
 
   return (
-    <div className=" grid grid-cols-2 justify-between px-12 gap-10">
-      {/* card yang dibuat perulangan */}
-      {[...Array(4)].map((_, index) => (
+    <Link href={`/home/project?id=${id}`} 
+    onMouseEnter={handleMouseEnter}
+    onMouseLeave={handleMouseLeave}
+    className="mt-10"
+    >
+      <div className=" flex flex-col justify-between px-12 gap-10">
+        {/* card yang dibuat perulangan */}
         <div
-          data-aos={[index % 2 === 0 ? "fade-up-right" : "fade-up-left"]}
+          data-aos={dataAos}
           data-aos-duration="1000"
-          key={index}
-          onClick={() => clickHandler(index)}
+          key={id}
+          onClick={() => clickHandler(id)}
           className="bg-SimaPro flex w-full h-[28rem] shadow-lg rounded-md overflow-hidden">
           <div className="relative flex items-end w-full h-full overflow-hidden">
-            <div
-              className="absolute hover:cursor-pointer z-10 w-full h-full opacity-0 hover:opacity-20 bg-black from-black to-transparent transition ease-in-out duration-1000"
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={() => handleMouseLeave(index)}></div>
+            <div className="absolute hover:cursor-pointer z-10 w-full h-full opacity-0 hover:opacity-20 bg-black from-black to-transparent transition ease-in-out duration-1000"></div>
 
             <Image
-              src="/assets/logo.png"
+              src={imageUrl}
               alt="Picture of the author"
               layout="fill"
               objectFit="cover"
             />
 
             <div
-              className={`absolute ${isHovered[index] ? "translate-y-0" : "translate-y-12"} ${isHovered[index] ? "opacity-100" : "opacity-0"} delay-150 z-10 w-full flex flex-row items-center gap-5 ps-4 mb-4 font-black transition ease-in-out duration-1000`}>
-              
-
-              <h1>SiMaPro Cikk {index + 1}</h1>
+              className={`absolute ${isHovered ? "translate-y-0" : "translate-y-12"} ${isHovered ? "opacity-100" : "opacity-0"} delay-150 z-10 w-full flex flex-row items-center gap-5 ps-4 mb-4 font-black transition ease-in-out duration-1000`}>
+              <h1>{name}</h1> <br />
             </div>
           </div>
         </div>
-      ))}
-      {/* end perulangan */}
-    </div>
+
+        {/* end perulangan */}
+      </div>
+    </Link>
   );
 };
 
 export default Card;
 
-// menggunakan api
-
-// "use client";
-
-// import React, { useEffect, useState } from "react";
-// import Image from "next/image";
-
-// interface Card {
-//   id: number;
-//   name: string;
-//   imageUrl: string;
-//   logoUrl: string;
-// }
-
-// const CardComponent: React.FC = () => {
-//   const [cards, setCards] = useState<Card[]>([]);
-//   const [isHovered, setIsHovered] = useState<boolean[]>([]);
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await fetch("/api/cards");
-//         if (!response.ok) {
-//           throw new Error("Network response was not ok");
-//         }
-//         const data = await response.json();
-//         setCards(data);
-//         setIsHovered(new Array(data.length).fill(false));
-//       } catch (error) {
-//         console.error("Error fetching data:", error);
-//       }
-//     };
-
-//     fetchData();
-//   }, []);
-
-//   const handleMouseEnter = (index: number): void => {
-//     const newHovered = [...isHovered];
-//     newHovered[index] = true;
-//     setIsHovered(newHovered);
-//   };
-
-//   const handleMouseLeave = (index: number): void => {
-//     const newHovered = [...isHovered];
-//     newHovered[index] = false;
-//     setIsHovered(newHovered);
-//   };
-
-//   return (
-//     <div className="grid grid-cols-2 justify-between px-12 gap-10">
-//       {cards.map((card, index) => (
-//         <div
-//           key={card.id}
-//           className="bg-SimaPro flex w-full h-96 overflow-hidden">
-//           <div className="relative flex items-end w-full h-full overflow-hidden">
-//             <div
-//               className="absolute z-10 w-full h-full opacity-0 hover:opacity-20 bg-black from-black to-transparent transition ease-in-out duration-1000"
-//               onMouseEnter={() => handleMouseEnter(index)}
-//               onMouseLeave={() => handleMouseLeave(index)}></div>
-//             <Image
-//               src={card.imageUrl}
-//               alt={card.name}
-//               layout="fill"
-//               objectFit="cover"
-//             />
-//             <div
-//               className={`absolute ${isHovered[index] ? "translate-y-0" : "translate-y-12"} ${isHovered[index] ? "opacity-100" : "opacity-0"} delay-150 z-10 w-full flex flex-row items-center gap-5 ps-4 mb-4 font-black transition ease-in-out duration-1000`}>
-//               <Image src={card.logoUrl} alt />
-//             </div>
-//           </div>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default CardComponent;

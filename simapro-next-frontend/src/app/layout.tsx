@@ -1,3 +1,5 @@
+
+
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
@@ -6,6 +8,7 @@ config.autoAddCss = false;
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+
 
 // import { useRouter } from "next/router";
 // import { usePathname } from "next/navigation";
