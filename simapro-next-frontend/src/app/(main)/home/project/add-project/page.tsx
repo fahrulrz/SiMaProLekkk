@@ -77,7 +77,7 @@ const AddProject: React.FC = () => {
   // Menangani submit form
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
-    router.push("home");
+    router.push("/home");
   };
 
   return (

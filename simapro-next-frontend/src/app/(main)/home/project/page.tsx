@@ -113,28 +113,21 @@ const Content = () => {
       });
   }, [id]);
 
-  console.log("ini adaalah");
-  console.log(projects?.image);
-  console.log("error", error);
-  console.log("ini adalah isi dari team", projects?.team.nama_tim);
-  console.log("ini adalah isi komen ", projects?.comment);
-
   const [isHoveredLike, setIsHoveredLike] = useState<boolean>(false);
 
   const [isHoveredComment, setIsHoveredComment] = useState<boolean>(false);
 
   return (
-
     <div className="flex flex-col gap-12 px-20 py-10 h-full w-screen">
       <div className="flex flex-row h-full w-full gap-5 bg-blue-500">
-        <div className="flex flex-col h-full w-3/4 bg-red-500 gap-10">
-          <div className="flex w-full px-24 bg-green-500">
+        <div className="flex flex-col h-full w-full max-h-[84.5vh] bg-red-500 gap-10">
+          <div className="flex w-full max-h-[84.5vh] px-24 bg-green-500">
             <Image
               src={projects?.image[0].link_gambar}
               alt="Picture of the author"
               width={1600}
               height={900}
-              sizes="80vh"
+              sizes="max-h-[80vh]"
               objectFit="cover"
             />
           </div>
@@ -175,20 +168,20 @@ const Content = () => {
                 alt="Picture of the author"
                 width={1600}
                 height={900}
-                sizes="80vh"
+                sizes="max-h-[80vh]"
                 objectFit="cover"
               />
             </div>
           </div>
         </div>
 
-
         {/* comment section */}
-        <div className="bg-gray-500 flex flex-col w-1/4 max-h-[84.5vh] relative">
+
+        <div className="bg-gray-500 flex flex-col w-2/6 max-h-[84.5vh] relative">
           <div className="flex w-full bg-red-500 z-30 top-0 start-0 sticky text-2xl">
             Comments
           </div>
-          <div className="flex flex-col mt-4 bg-green-500 overflow-scroll px-4">
+          <div className="flex flex-col mt-4 bg-green-500 overflow-scroll px-4 pb-9">
             <div className="bg-red-200">
               {projects?.comment.map((comment) => (
                 <Comment
@@ -232,11 +225,9 @@ const Content = () => {
             </form>
           </div>
         </div>
+        {/* end comment section */}
       </div>
-      {/* end comment section */}
 
-
-      
       {/* like section */}
       <div id="like-comment" className="flex gap-14">
         <div className="flex flex-col text-primary items-center ">
@@ -254,7 +245,6 @@ const Content = () => {
       </div>
       {/* end like section */}
 
-
       <div className="flex flex-col gap-4">
         <div className="flex justify-center items-center py-4 bg-white text-4xl font-black text-primary tracking-wide">
           {projects?.nama_proyek}
@@ -266,14 +256,19 @@ const Content = () => {
             </p>
             <p>Tahun {projects?.year.map((year) => year.tahun).join(", ")}</p>
             <div>
+              Stakeholder :{" "}
               <Link
                 href={`/stakeholder/detail-stakeholder?id=${projects?.stakeholder.id}`}
-                className="whitespace-pre flex">
-                Stakeholder :
-                <div className="hover:underline">
-                  {" "}
-                  {projects?.stakeholder.nama}
-                </div>
+                className="hover:underline">
+                {projects?.stakeholder.nama}
+              </Link>
+            </div>
+            <div>
+              Nama Tim :{" "}
+              <Link
+                href={`/team?id=${projects?.team.id}`}
+                className="hover:underline">
+                {projects?.team.nama_tim}
               </Link>
             </div>
             <p>Nama Anggota Kelompok : </p>
@@ -332,16 +327,14 @@ const Content = () => {
           <div className="bg-white w-3/5 p-2 flex flex-col gap-4">
             <p>Description : </p>
             <p>{projects?.deskripsi}</p>
-
-           
           </div>
         </div>
         <div className="w-full flex justify-end gap-6">
           <Link href={`/home/project/edit-project?id=${projects?.id}`}>
-              <button className="bg-white text-primary hover:bg-primary hover:text-white flex items-center gap-3 p-2 px-6  rounded-md">
-                <FontAwesomeIcon icon={faPenToSquare} size="xl" />
-                Edit Proyek
-              </button>
+            <button className="bg-white text-primary hover:bg-primary hover:text-white flex items-center gap-3 p-2 px-6  rounded-md">
+              <FontAwesomeIcon icon={faPenToSquare} size="xl" />
+              Edit Proyek
+            </button>
           </Link>
 
           <a href="#" className="">

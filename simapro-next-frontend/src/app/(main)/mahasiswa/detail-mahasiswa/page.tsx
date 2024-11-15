@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,6 +12,7 @@ import Card from "@/components/Card";
 // import gambar from "../../../../../public/assets/photoProfile.png";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 interface Mahasiswa {
   id: number;
@@ -40,6 +41,8 @@ const DetailMahasiswa = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
 
+  const router = useRouter();
+
   useEffect(() => {
     axios
       .get(`http://127.0.0.1:8000/api/mahasiswa/${id}`)
@@ -50,6 +53,11 @@ const DetailMahasiswa = () => {
         setError(error);
       });
   }, [id]);
+
+  const editHandler = (event: React.FormEvent) => {
+    event.preventDefault();
+    router.push(`mahasiswa/edit-mahasiswa?id=${id}`);
+  };
 
   console.log(error);
   // console.log("ini adalah gambar",  mahasiswa?.project[0].image[0].link_gambar)
@@ -87,16 +95,17 @@ const DetailMahasiswa = () => {
             </div>
             <div className="gap-4 mt-10 w-full grid grid-cols-2 px-24">
               <div>
-                <a
-                  href="#"
-                  className="bg-primary flex w-full text-lg hover:bg-white hover:text-primary items-center gap-3 p-2 px-6 text-white rounded-md">
-                  <FontAwesomeIcon
-                    icon={faPenToSquare}
-                    size="xl"
-                    className="me-2"
-                  />
-                  Edit Profile
-                </a>
+                <Link href={`edit-mahasiswa?id=${id}`}>
+                  <button className="bg-primary flex w-full text-lg hover:bg-white hover:text-primary items-center gap-3 p-2 px-6 text-white rounded-md">
+                    {" "}
+                    <FontAwesomeIcon
+                      icon={faPenToSquare}
+                      size="xl"
+                      className="me-2"
+                    />
+                    Edit Profile
+                  </button>
+                </Link>
               </div>
               <div>
                 <a

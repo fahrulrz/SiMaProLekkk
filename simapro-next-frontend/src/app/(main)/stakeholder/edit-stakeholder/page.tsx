@@ -1,22 +1,43 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+
+import { Menu } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
+
 import "flowbite";
 
-const AddMahasiswa = () => {
-  const router = useRouter();
+interface NavigationItem {
+  id: number;
+  name: string;
+}
 
+const EditStakeholder = () => {
+  const router = useRouter();
   const [fileName, setFileName] = useState<string>(
-    "Add Foto Profile Mahasiswa"
+    "Add Foto Profil Stakeholder"
   );
+
+  const [selectedItem, setSelectedItem] = useState<NavigationItem | null>(null);
+
+  const handleSelect = (item: NavigationItem) => {
+    setSelectedItem(item);
+  };
+
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+
+  const navigationItems: NavigationItem[] = [
+    { id: 1, name: "Internal" },
+    { id: 2, name: "Eksternal" },
+  ];
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files && files.length > 0) {
       setFileName(files[0].name);
     } else {
-      setFileName("Add Foto Profile Mahasiswa");
+      setFileName("Add Foto Profil Stakeholder");
     }
   };
 
@@ -24,7 +45,6 @@ const AddMahasiswa = () => {
     event.preventDefault();
     router.push("/home");
   };
-
   return (
     <>
       <form onSubmit={submitHandler}>
@@ -32,7 +52,7 @@ const AddMahasiswa = () => {
           <div className="flex flex-col gap-5">
             <div className=" flex w-full items-center justify-center">
               <div className="text-4xl font-bold text-primary">
-                Profil Mahasiswa
+                Profile Stakeholder
               </div>
             </div>
             <div className="w-full mt-8 flex flex-col gap-4 h-full">
@@ -51,14 +71,68 @@ const AddMahasiswa = () => {
               </div>
               <div className=" grid grid-cols-4 gap-4 w-full">
                 <label
-                  htmlFor="nim"
+                  htmlFor="selectedProject"
                   className="flex justify-center items-center text-xl text-primary font-medium w-full bg-inputAddProject col-span-1 rounded-md">
-                  NIM
+                  Kategori
+                </label>
+                <Menu
+                  as="div"
+                  className="relative insline-block text-left w-full col-span-3">
+                  <Menu.Button
+                    className={`inline-flex w-full items-center gap-x-1.5 rounded-md ${selectedItem ? "bg-white" : "bg-primary"}  hover:bg-gray-50 px-3 py-2 text-lg ${isHovered ? "text-primary" : `${selectedItem ? "text-primary" : "text-white"}`} shadow-sm`}
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}>
+                    {selectedItem ? selectedItem.name : "Pilih kategori"}{" "}
+                    {/* Tampilkan nilai yang dipilih */}
+                    <ChevronDownIcon className="h-5 w-5 ms-auto me-0" />
+                  </Menu.Button>
+
+                  <Menu.Items className="absolute left-0 z-10 mt-2 w-full bg-primary rounded-md shadow-lg overflow-hidden">
+                    {navigationItems.map((item) => (
+                      <Menu.Item key={item.id}>
+                        {({ active }) => (
+                          <button
+                            onClick={() => handleSelect(item)}
+                            className={`${
+                              active ? "bg-gray-100 text-primary" : "text-white"
+                            } block w-full text-left px-4 py-2 text-lg`}>
+                            {item.name}
+                          </button>
+                        )}
+                      </Menu.Item>
+                    ))}
+                  </Menu.Items>
+                </Menu>
+                {/* Tampilkan nilai yang dipilih sebagai nilai input tersembunyi */}
+                <input
+                  type="hidden"
+                  name="selectedProject"
+                  value={selectedItem ? selectedItem.name : ""}
+                />
+              </div>
+              <div className=" grid grid-cols-4 gap-4 w-full">
+                <label
+                  htmlFor="email"
+                  className="flex justify-center items-center text-xl text-primary font-medium w-full bg-inputAddProject col-span-1 rounded-md">
+                  Email
                 </label>
                 <input
-                  id="nim"
+                  id="email"
+                  type="email"
+                  placeholder="Email"
+                  className=" placeholder:text-hint text-primary bg-inputAddProject text-lg border-none focus:outline-none focus:ring-0 focus:ring-[var(--border)] rounded-md p-2 w-full col-span-3"
+                />
+              </div>
+              <div className=" grid grid-cols-4 gap-4 w-full">
+                <label
+                  htmlFor="noTelepon"
+                  className="flex justify-center items-center text-xl text-primary font-medium w-full bg-inputAddProject col-span-1 rounded-md">
+                  No Telepon
+                </label>
+                <input
+                  id="noTelepon"
                   type="text"
-                  placeholder="NIM"
+                  placeholder="No Telepon"
                   className=" placeholder:text-hint text-primary bg-inputAddProject text-lg border-none focus:outline-none focus:ring-0 focus:ring-[var(--border)] rounded-md p-2 w-full col-span-3"
                 />
               </div>
@@ -66,7 +140,7 @@ const AddMahasiswa = () => {
                 <label
                   htmlFor="foto"
                   className="flex py-2 justify-center items-center text-xl text-primary font-medium w-full bg-inputAddProject col-span-1 rounded-md">
-                  Foto
+                  Foto Profil
                 </label>
 
                 <div className="relative ">
@@ -84,6 +158,13 @@ const AddMahasiswa = () => {
                   />
                 </div>
               </div>
+              {/* <div className="flex w-full items-end justify-end">
+                <button
+                  type="submit"
+                  className="w-52 text-primary drop-shadow-md bg-inputAddProject hover:bg-primary hover:text-white focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                  Upload
+                </button>
+              </div> */}
               <div className="flex gap-4 ml-auto">
                 <button
                   type="button"
@@ -102,7 +183,7 @@ const AddMahasiswa = () => {
             </div>
           </div>
         </div>
-
+        {/* confirm modal */}
         <div
           id="confirmModal"
           tabIndex={-1}
@@ -177,4 +258,4 @@ const AddMahasiswa = () => {
   );
 };
 
-export default AddMahasiswa;
+export default EditStakeholder;

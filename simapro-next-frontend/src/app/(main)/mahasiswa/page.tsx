@@ -24,56 +24,46 @@ interface Anggota {
   member_id: number;
 }
 
-
 const Mahasiswa = () => {
-
   const [mahasiswa, setMahasiswa] = useState<Mahasiswa[]>([]);
   const [error, setError] = useState(null);
-  // const router = usePathname();
 
   const router = useRouter();
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/mahasiswa").then((response) => {
-      setMahasiswa(response.data.data);
-      
-    })
-    .catch((error) => {
-      setError(error);
-    });
+    axios
+      .get("http://127.0.0.1:8000/api/mahasiswa")
+      .then((response) => {
+        setMahasiswa(response.data.data);
+      })
+      .catch((error) => {
+        setError(error);
+      });
   }, []);
 
   console.log(mahasiswa);
 
   console.log(error);
 
-  const clickHandler = (mahasiswa : number) => {
+  const clickHandler = (mahasiswa: number) => {
     router.push(`/mahasiswa/detail-mahasiswa?id=${mahasiswa}`);
-  }
+  };
 
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    // <div className="bg-blue-500 h-full flex flex-col gap-5">
-    //   <h1 className="bg-red-600 h-96">
-    //     Halamaan Mahasiswa
-    //     <br />
-    //     router halaman ini adalah {router} //cara mengambil routh yang sedang digunakan
-    //   </h1>
-    //   <h1 className="bg-red-600 h-96">Halamaan Mahasiswa</h1>
-    //   <h1 className="bg-red-600 h-96">Halamaan Mahasiswa</h1>
-    //   <div className="bg-purple-600 h-96">
-    //     <h1>apsoieghoweuih</h1>
-    //   </div>
-    // </div>
-
     <>
-      <div className="h-full w-screen">
+      <div className="h-full w-screen overflow-hidden">
+        <div
+          className={`bg-black/30 absolute flex w-screen h-full  ${isHovered ? "z-20 opacity-100 " : "z-0 opacity-0 "} transition duration-500 ease-in-out`}></div>
         <div className="grid grid-cols-4 p-20 gap-16">
           {mahasiswa.map((mahasiswa) => (
             <div
               key={mahasiswa.id}
               onClick={() => clickHandler(mahasiswa.id)}
-              className="bg-[#FBF9F1] h-[36rem] flex flex-col justify-center items-center cursor-pointer">
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              className={`bg-[#FBF9F1] h-[36rem] flex flex-col justify-center items-center cursor-pointer hover:scale-110 hover:shadow-lg z-10 hover:z-40 transition duration-500 ease-in-out`}>
               <div className="flex flex-col w-full h-full justify-center items-center mb-10">
                 <div className="flex w-full h-full p-8">
                   <div className="flex relative h-full w-full">

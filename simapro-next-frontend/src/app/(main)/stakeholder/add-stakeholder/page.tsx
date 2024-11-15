@@ -43,7 +43,7 @@ const AddStakeholder = () => {
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
-    router.push("home");
+    router.push("/home");
   };
   return (
     <>
@@ -52,7 +52,7 @@ const AddStakeholder = () => {
           <div className="flex flex-col gap-5">
             <div className=" flex w-full items-center justify-center">
               <div className="text-4xl font-bold text-primary">
-                Profil Mahasiswa
+                Profile Stakeholder
               </div>
             </div>
             <div className="w-full mt-8 flex flex-col gap-4 h-full">

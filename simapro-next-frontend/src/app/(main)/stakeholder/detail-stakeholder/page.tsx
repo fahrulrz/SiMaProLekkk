@@ -94,7 +94,7 @@ const DetailStakeholder = () => {
             <div className="gap-4 mt-10 w-full grid grid-cols-2 px-24">
               <div>
                 <a
-                  href="/add-stakeholder"
+                  href="/stakeholder/edit-stakeholder"
                   className="bg-primary flex w-full text-lg hover:bg-white hover:text-primary items-center gap-3 p-2 px-6 text-white rounded-md">
                   <FontAwesomeIcon
                     icon={faPenToSquare}

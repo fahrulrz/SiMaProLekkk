@@ -1,108 +1,35 @@
-
-// import { useState } from "react";
-
-import { usePathname } from "next/navigation";
-
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-// interface SearchResult {
-//   id: number;
-//   name: string;
-// }
-
 const Search = () => {
+  const router = useRouter();
+  const [keyword, setKeyword] = useState("");
 
-  const pathname = usePathname();
-
-  const path = pathname.split("/");
-  let search = "";
-
-  if (path[path.length - 1] == "home") {
-    search = "Search Project";
-  } else {
-
-    search = "Search " + path[1].charAt(0).toUpperCase() + path[1].slice(1);
-  }
-
-
-    // menggunakan api
-//   const [query, setQuery] = useState<string>("");
-//   const [results, setResults] = useState<SearchResult[]>([]);
-//   const [loading, setLoading] = useState<boolean>(false);
-
-//   const handleSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
-//     const value = event.target.value;
-//     setQuery(value);
-
-//     if (value) {
-//       setLoading(true);
-//       try {
-//         // Fetch data dari API Laravel berdasarkan query
-//         const response = await fetch(
-//           `http://localhost:8000/api/search?query=${value}`
-//         );
-//         const data = await response.json();
-//         setResults(data);
-//       } catch (error) {
-//         console.error("Error fetching data:", error);
-//       } finally {
-//         setLoading(false);
-//       }
-//     } else {
-//       setResults([]);
-//     }
-//   };
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Arahkan ke halaman pencarian lain dengan query keyword
+    router.push(`/search-results?query=${keyword}`);
+  };
 
   return (
-    // <form className="max-w-md mx-auto">
-    //   <label className="relative block">
-    //     <span className="sr-only">Search</span>
-    //     <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-    //       <svg className="h-5 w-5 fill-slate-300" viewBox="0 0 20 20">
-    //         <FontAwesomeIcon
-    //           icon={faMagnifyingGlass}
-    //           style={{ fontSize: "1.5rem" }}
-    //           className="text-primary"
-    //         />
-    //       </svg>
-    //     </span>
-    //     <input
-    //       className="placeholder:italic placeholder:text-[#92c7cfd0] block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
-    //       placeholder="Search projects..."
-    //       type="text"
-    //       name="search"
-    //       value={query}
-    //       onChange={handleSearch}
-    //     />
-    //   </label>
-    //   {loading && <p className="text-center mt-2">Loading...</p>}
-    //   <ul className="mt-4 border border-slate-200 rounded-md p-4">
-    //     {results.map((result, index) => (
-    //       <li key={index} className="py-1 text-slate-700">
-    //         {result.name}
-    //       </li>
-    //     ))}
-    //   </ul>
-    // </form>
-
-    <form className="max-w-md mx-auto">
+    <form onSubmit={handleSearch} className="max-w-md mx-auto">
       <label className="relative block">
         <span className="sr-only">Search</span>
         <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-          <svg className="h-5 w-5 fill-slate-300" viewBox="0 0 20 20">
-            <FontAwesomeIcon
-              icon={faMagnifyingGlass}
-              style={{ fontSize: "1.5rem" }}
-              className="text-primary"
-            />
-          </svg>
+          <FontAwesomeIcon
+            icon={faMagnifyingGlass}
+            style={{ fontSize: "1.5rem" }}
+            className="text-primary"
+          />
         </span>
         <input
           className="placeholder:italic placeholder:text-[#92c7cfd0] text-primary block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
-          placeholder={search}
+          placeholder="Search..."
           type="text"
-          name="search"
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
         />
       </label>
     </form>

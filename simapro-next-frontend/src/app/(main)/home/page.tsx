@@ -235,7 +235,7 @@ export default function Dashboard() {
               </div>
 
               <div data-aos="fade-up" data-aos-duration="1000">
-                <a className="" href="add-profile-team">
+                <a className="" href="/team/add-profile-team">
                   <button
                     type="submit"
                     className="w-fit h-10 bg-primary ps-4 pe-4 shadow-md text-white flex justify-center items-center rounded-[5px] font-bold tracking-wide hover:bg-gray-50 hover:text-primary transition ease-in-out duration-300">

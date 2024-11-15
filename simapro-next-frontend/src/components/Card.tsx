@@ -69,7 +69,7 @@ const Card: React.FC<CardProps> = ({ id, name, imageUrl, dataAos}) => {
 
             <div
               className={`absolute ${isHovered ? "translate-y-0" : "translate-y-12"} ${isHovered ? "opacity-100" : "opacity-0"} delay-150 z-10 w-full flex flex-row items-center gap-5 ps-4 mb-4 font-black transition ease-in-out duration-1000`}>
-              <h1>{name}</h1> <br />
+              <h1>{name}</h1>
             </div>
           </div>
         </div>
